@@ -3,7 +3,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
-const { concat } = require('./seeds/cities');
 
 mongoose.connect('mongodb://localhost:27017/camp-reviews', {
     useNewUrlParser:true,
@@ -58,6 +57,12 @@ app.put('/campgrounds/:id', async(req, res) => {
     const {id} = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
     res.redirect(`/campgrounds/${campground._id}`)
+});
+
+app.delete('/campground/:id', async(req, res) => {
+    const {id} = req.params;
+    await Campground.findByIdAndDelete(id);
+    res.redirect('/campgrounds');
 })
 
 
