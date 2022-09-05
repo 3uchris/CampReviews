@@ -23,7 +23,7 @@ const reviewRoutes = require('./routes/reviews');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp-reviews';
+const dbUrl = process.env.DB_URL || 'mongodb://0.0.0.0:27017/camp-reviews';
 
 
 mongoose.connect(dbUrl, {
