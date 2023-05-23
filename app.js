@@ -20,7 +20,8 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-const MongoDBStore = require('connect-mongodb-session')(session);
+//const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoStore = require('connect-mongo');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/camp-reviews';
@@ -56,7 +57,7 @@ app.use(
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
-const store = new MongoDBStore({
+const store = MongoStore.create({
     url: dbUrl,
     secret,
     touchAfter: 24 * 3600
